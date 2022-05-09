@@ -1,13 +1,12 @@
-import NextAuth from "next-auth"
-import GoogleProvider from "next-auth/providers/google"
-import {PrismaAdapter} from "@next-auth/prisma-adapter"
-import {PrismaClient} from "@prisma/client"
+import NextAuth from 'next-auth';
+import GoogleProvider from 'next-auth/providers/google';
+import { PrismaAdapter } from '@next-auth/prisma-adapter';
+import { PrismaClient } from '@prisma/client';
 import dotenv from 'dotenv';
-import {session} from "next-auth/core/routes";
 
 dotenv.config();
 
-const prisma = new PrismaClient()
+const prisma = new PrismaClient();
 
 export default NextAuth({
     adapter: PrismaAdapter(prisma),
@@ -20,23 +19,23 @@ export default NextAuth({
     providers: [
         GoogleProvider({
             clientId: process.env.GOOGLE_CLIENT_ID as string,
-            clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
-        }),
+            clientSecret: process.env.GOOGLE_CLIENT_SECRET as string
+        })
     ],
     callbacks: {
-        async jwt({token, user}) {
+        async jwt({ token, user }) {
             if (user) {
-                token.accessToken = user.access_token as string
+                token.accessToken = user.access_token as string;
             }
 
             user && (token.id = user.id);
 
-            return token
+            return token;
         },
-        async session({session, token, user}) {
-            session.accessToken = token.accessToken
+        async session({ session, token }) {
+            session.accessToken = token.accessToken;
             session.id = token.id;
-            return session
+            return session;
         }
     }
-})
+});

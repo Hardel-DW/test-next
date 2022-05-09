@@ -4,21 +4,8 @@
         "ecmaVersion": 12,
         "sourceType": "module"
     },
-    "plugins": [
-        "@typescript-eslint",
-        "import",
-        "prettier"
-    ],
-    "extends": [
-        "eslint:recommended",
-        "plugin:@typescript-eslint/recommended",
-        "plugin:import/recommended",
-        "plugin:import/typescript",
-        "plugin:node/recommended",
-        "plugin:prettier/recommended",
-        "prettier",
-        "next/core-web-vitals"
-    ],
+    "plugins": ["@typescript-eslint", "import", "prettier"],
+    "extends": ["eslint:recommended", "plugin:@typescript-eslint/recommended", "plugin:import/recommended", "plugin:import/typescript", "plugin:node/recommended", "plugin:prettier/recommended", "prettier", "next/core-web-vitals"],
     "env": {
         "es2021": true,
         "node": true
